@@ -1,6 +1,6 @@
 {
     "name": "zerp/account",
-    "description": "Description for account package",
+    "description": "Accounting module for the Zerp ERP platform",
     "type": "library",
     "license": "MIT",
     "require": {},

@@ -6,7 +6,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Zerp\Account\Services\BankTransactionsService;
 use Zerp\Account\Services\JournalService;
-use Workdo\DairyCattleManagement\Events\UpdateDairyCattlePaymentStatus;
+use Zerp\DairyCattleManagement\Events\UpdateDairyCattlePaymentStatus;
 
 class UpdateDairyCattlePaymentStatusListener
 {

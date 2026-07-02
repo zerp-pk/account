@@ -8,7 +8,7 @@ use Zerp\Account\Models\ChartOfAccount;
 use Illuminate\Support\Facades\Auth;
 use Zerp\Account\Events\UpdateBudgetSpending;
 use Zerp\Account\Models\BankAccount;
-use Workdo\Retainer\Models\RetainerPaymentAllocation;
+use Zerp\Retainer\Models\RetainerPaymentAllocation;
 
 /**
  * JournalService - Automatic double-entry journal creation for all transactions

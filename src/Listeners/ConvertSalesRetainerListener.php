@@ -3,7 +3,7 @@
 namespace Zerp\Account\Listeners;
 
 use Zerp\Account\Services\JournalService;
-use Workdo\Retainer\Events\ConvertSalesRetainer;
+use Zerp\Retainer\Events\ConvertSalesRetainer;
 
 class ConvertSalesRetainerListener
 {

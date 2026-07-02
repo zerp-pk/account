@@ -3,7 +3,7 @@
 namespace Zerp\Account\Listeners;
 
 use Zerp\Account\Services\BankTransactionsService;
-use Workdo\Retainer\Events\UpdateRetainerPaymentStatus;
+use Zerp\Retainer\Events\UpdateRetainerPaymentStatus;
 use Zerp\Account\Services\JournalService;
 
 class UpdateRetainerPaymentStatusListener

@@ -4,7 +4,7 @@ namespace Zerp\Account\Listeners;
 
 use App\Events\DefaultData;
 use Zerp\Account\Helpers\AccountUtility;
-use Workdo\Test\Models\TestItem;
+use Zerp\Test\Models\TestItem;
 
 class DataDefault
 {
