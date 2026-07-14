@@ -2,12 +2,15 @@
 
 namespace Zerp\Account\Models;
 
+use App\Models\Concerns\TenantScoped;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\User;
 
 class BankTransaction extends Model
 {
+    use TenantScoped;
+
     protected $fillable = [
         'bank_account_id',
         'transaction_date',

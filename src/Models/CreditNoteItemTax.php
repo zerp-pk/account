@@ -2,11 +2,17 @@
 
 namespace Zerp\Account\Models;
 
+use App\Models\Concerns\TenantScoped;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CreditNoteItemTax extends Model
 {
+    use TenantScoped;
+
+    /** No created_by column; the parent item carries the tenant boundary. */
+    public string $tenantParent = 'item';
+
     protected $fillable = [
         'item_id',
         'tax_name',

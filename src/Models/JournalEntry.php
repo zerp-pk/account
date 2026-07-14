@@ -2,6 +2,7 @@
 
 namespace Zerp\Account\Models;
 
+use App\Models\Concerns\TenantScoped;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,6 +10,8 @@ use App\Models\User;
 
 class JournalEntry extends Model
 {
+    use TenantScoped;
+
     protected $fillable = [
         'journal_number',
         'journal_date',

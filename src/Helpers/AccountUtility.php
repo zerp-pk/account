@@ -20,7 +20,7 @@ class AccountUtility
 
     private static function createAccountCategories($company_id)
     {
-        $exist = AccountCategory::where('created_by', $company_id)->first();
+        $exist = AccountCategory::withoutGlobalScope('tenant')->where('created_by', $company_id)->first();
         if($exist) return;
 
         $categories = [
@@ -40,10 +40,10 @@ class AccountUtility
 
     private static function createAccountTypes($company_id)
     {
-        $exist = AccountType::where('created_by', $company_id)->first();
+        $exist = AccountType::withoutGlobalScope('tenant')->where('created_by', $company_id)->first();
         if($exist) return;
 
-        $categories = AccountCategory::where('created_by', $company_id)->get()->keyBy('code');
+        $categories = AccountCategory::withoutGlobalScope('tenant')->where('created_by', $company_id)->get()->keyBy('code');
         if(count($categories) == 0) return;
 
         $accountTypes = [
@@ -80,10 +80,10 @@ class AccountUtility
 
     private static function createChartOfAccounts($company_id)
     {
-        $exist = ChartOfAccount::where('created_by', $company_id)->first();
+        $exist = ChartOfAccount::withoutGlobalScope('tenant')->where('created_by', $company_id)->first();
         if($exist) return;
 
-        $accountTypes = AccountType::where('created_by', $company_id)->get()->keyBy('code');
+        $accountTypes = AccountType::withoutGlobalScope('tenant')->where('created_by', $company_id)->get()->keyBy('code');
         if(count($accountTypes) == 0) return;
 
         $chartOfAccounts = [

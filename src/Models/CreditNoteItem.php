@@ -2,12 +2,18 @@
 
 namespace Zerp\Account\Models;
 
+use App\Models\Concerns\TenantScoped;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CreditNoteItem extends Model
 {
+    use TenantScoped;
+
+    /** No created_by column; the parent creditNote carries the tenant boundary. */
+    public string $tenantParent = 'creditNote';
+
     protected $fillable = [
         'credit_note_id',
         'product_id',

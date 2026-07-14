@@ -2,11 +2,14 @@
 
 namespace Zerp\Account\Models;
 
+use App\Models\Concerns\TenantScoped;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CreditNoteApplication extends Model
 {
+    use TenantScoped;
+
     protected $fillable = [
         'credit_note_id',
         'payment_id',
