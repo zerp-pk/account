@@ -204,7 +204,7 @@ class VendorPaymentController extends Controller
                 $debitNoteApplication = DebitNoteApplication::where('payment_id', $vendorPayment->id)->get();
 
                 foreach ($debitNoteApplication as $debitNote) {
-                    $debitNoteModel = DebitNote::find($debitNote['debit_note_id']);
+                    $debitNoteModel = DebitNote::findOrFail($debitNote['debit_note_id']);
                     $debitNoteModel->applied_amount += $debitNote['applied_amount'];
                     $debitNoteModel->balance_amount = $debitNoteModel->total_amount - $debitNoteModel->applied_amount;
                     $debitNoteModel->status = $debitNoteModel->balance_amount <= 0 ? 'applied' : 'partial';

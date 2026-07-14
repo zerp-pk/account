@@ -2,12 +2,15 @@
 
 namespace Zerp\Account\Models;
 
+use App\Models\Concerns\TenantScoped;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DebitNoteItem extends Model
 {
+    use TenantScoped;
+
     protected $fillable = [
         'debit_note_id',
         'product_id',

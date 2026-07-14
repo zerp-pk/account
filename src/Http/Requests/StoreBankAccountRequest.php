@@ -26,7 +26,7 @@ class StoreBankAccountRequest extends FormRequest
             'swift_code' => 'nullable|string|max:11',
             'routing_number' => 'nullable|string|max:20',
             'is_active' => 'boolean',
-            'gl_account_id' => 'required|exists:chart_of_accounts,id'
+            'gl_account_id' => 'required|exists:chart_of_accounts,id,created_by,' . creatorId()
         ];
     }
 }

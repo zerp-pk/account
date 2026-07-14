@@ -2,13 +2,14 @@
 
 namespace Zerp\Account\Models;
 
+use App\Models\Concerns\TenantScoped;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Zerp\Account\Models\ChartOfAccount;
 
 class BankAccount extends Model
 {
-    use HasFactory;
+    use HasFactory, TenantScoped;
 
     protected $fillable = [
         'account_number',

@@ -206,7 +206,7 @@ class CustomerPaymentController extends Controller
                 $creditNoteApplication = CreditNoteApplication::where('payment_id', $customerPayment->id)->get();
 
                 foreach ($creditNoteApplication as $creditNote) {
-                    $creditNoteModel = CreditNote::find($creditNote['credit_note_id']);
+                    $creditNoteModel = CreditNote::findOrFail($creditNote['credit_note_id']);
                     $creditNoteModel->applied_amount += $creditNote['applied_amount'];
                     $creditNoteModel->balance_amount = $creditNoteModel->total_amount - $creditNoteModel->applied_amount;
                     $creditNoteModel->status = $creditNoteModel->balance_amount <= 0 ? 'applied' : 'partial';

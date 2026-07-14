@@ -16,7 +16,7 @@ class StoreExpenseCategoriesRequest extends FormRequest
         return [
             'category_name' => 'required',
             'category_code' => 'required|unique:expense_categories,category_code',
-            'gl_account_id' => 'nullable|exists:chart_of_accounts,id',
+            'gl_account_id' => 'nullable|exists:chart_of_accounts,id,created_by,' . creatorId(),
             'description' => 'nullable',
             'is_active' => 'boolean'
         ];

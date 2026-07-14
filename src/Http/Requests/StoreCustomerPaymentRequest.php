@@ -17,15 +17,15 @@ class StoreCustomerPaymentRequest extends FormRequest
         return [
             'payment_date' => 'required|date|before_or_equal:today',
             'customer_id' => 'required|exists:users,id',
-            'bank_account_id' => 'required|exists:bank_accounts,id',
+            'bank_account_id' => 'required|exists:bank_accounts,id,created_by,' . creatorId(),
             'reference_number' => 'nullable|string|max:100',
             'payment_amount' => 'required|numeric|min:0',
             'notes' => 'nullable|string',
             'allocations' => 'nullable|array',
-            'allocations.*.invoice_id' => 'required|exists:sales_invoices,id',
+            'allocations.*.invoice_id' => 'required|exists:sales_invoices,id,created_by,' . creatorId(),
             'allocations.*.amount' => 'required|numeric|min:0.01',
             'credit_notes' => 'nullable|array',
-            'credit_notes.*.credit_note_id' => 'required|exists:credit_notes,id',
+            'credit_notes.*.credit_note_id' => 'required|exists:credit_notes,id,created_by,' . creatorId(),
             'credit_notes.*.amount' => 'required|numeric|min:0.01'
         ];
     }

@@ -2,6 +2,7 @@
 
 namespace Zerp\Account\Models;
 
+use App\Models\Concerns\TenantScoped;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,6 +12,8 @@ use App\Models\PurchaseReturn;
 
 class DebitNote extends Model
 {
+    use TenantScoped;
+
     protected $fillable = [
         'debit_note_number',
         'debit_note_date',
