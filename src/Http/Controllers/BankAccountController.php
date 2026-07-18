@@ -39,7 +39,7 @@ class BankAccountController extends Controller
                 ->when(request('bank_name'), fn($q) => $q->where('bank_name', 'like', '%' . request('bank_name') . '%'))
                 ->when(request('account_type') !== null && request('account_type') !== '', fn($q) => $q->where('account_type', request('account_type')))
                 ->when(request('is_active') !== null && request('is_active') !== '', fn($q) => $q->where('is_active', request('is_active') === '1'))
-                ->when(request('sort'), fn($q) => $q->orderBy(request('sort'), request('direction', 'asc')), fn($q) => $q->latest())
+                ->sortSafe(request('sort'), request('direction'))
                 ->paginate(request('per_page', 10))
                 ->withQueryString();
 

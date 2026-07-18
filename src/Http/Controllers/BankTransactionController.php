@@ -31,7 +31,7 @@ class BankTransactionController extends Controller
             $sortField = $request->get('sort', 'created_at');
             $sortDirection = $request->get('direction', 'desc');
             if ($sortField) {
-                $query->orderBy($sortField, $sortDirection);
+                $query->sortSafe($sortField, $sortDirection);
             }
 
             $transactions = $query->paginate($request->get('per_page', 10));

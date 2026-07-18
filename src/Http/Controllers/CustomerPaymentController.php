@@ -67,7 +67,7 @@ class CustomerPaymentController extends Controller
 
             $sortField = $request->get('sort', 'created_at');
             $sortDirection = $request->get('direction', 'desc');
-            $query->orderBy($sortField, $sortDirection);
+            $query->sortSafe($sortField, $sortDirection);
 
             $payments = $query->paginate($request->get('per_page', 10));
             $customers = User::where('type', 'client')->where('created_by', creatorId())->get();

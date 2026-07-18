@@ -67,7 +67,7 @@ class VendorPaymentController extends Controller
 
             $sortField = $request->get('sort', 'created_at');
             $sortDirection = $request->get('direction', 'desc');
-            $query->orderBy($sortField, $sortDirection);
+            $query->sortSafe($sortField, $sortDirection);
 
             $payments = $query->paginate($request->get('per_page', 10));
             $vendors = User::where('type', 'vendor')->where('created_by', creatorId())->get();
