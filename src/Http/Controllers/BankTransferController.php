@@ -41,7 +41,7 @@ class BankTransferController extends Controller
                 ->when(request('status') !== null && request('status') !== '', fn($q) => $q->where('status', request('status')))
                 ->when(request('from_account_id'), fn($q) => $q->where('from_account_id', request('from_account_id')))
                 ->when(request('to_account_id'), fn($q) => $q->where('to_account_id', request('to_account_id')))
-                ->when(request('sort'), fn($q) => $q->orderBy(request('sort'), request('direction', 'asc')), fn($q) => $q->latest())
+                ->sortSafe(request('sort'), request('direction'))
                 ->paginate(request('per_page', 10))
                 ->withQueryString();
 

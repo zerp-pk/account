@@ -72,7 +72,7 @@ class CreditNoteController extends Controller
             }
 
             if ($request->sort) {
-                $query->orderBy($request->sort, $request->direction ?? 'asc');
+                $query->sortSafe($request->sort, $request->direction, 'created_at', 'asc');
             } else {
                 $query->orderBy('credit_note_date', 'desc');
             }
