@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Zerp\Account\Models\ChartOfAccount;
 use Zerp\Account\Http\Requests\Api\StoreChartOfAccountApiRequest;
 use Zerp\Account\Http\Requests\Api\UpdateChartOfAccountApiRequest;
@@ -50,7 +51,8 @@ class ChartOfAccountApiController extends Controller
 
             return $this->paginatedResponse($chartofaccounts, __('Chart of accounts retrieved successfully'));
         } catch (\Exception $e) {
-            return $this->errorResponse(__('Something went wrong'), $e->getMessage(), 500);
+            Log::error('Chart of Account API index error', ['e' => $e]);
+            return $this->errorResponse(__('Something went wrong'), null, 500);
         }
     }
 
@@ -81,7 +83,7 @@ class ChartOfAccountApiController extends Controller
             $chartofaccount->current_balance = $validated['current_balance'] ?? 0;
             $chartofaccount->is_active = $validated['is_active'];
             $chartofaccount->description = $validated['description'] ?? null;
-            $chartofaccount->account_type_id = $validated['account_type_id'] ?? null;
+            $chartofaccount->account_type_id = $validated['account_type_id'];
             $chartofaccount->creator_id = Auth::id();
             $chartofaccount->created_by = creatorId();
             $chartofaccount->save();
@@ -90,7 +92,8 @@ class ChartOfAccountApiController extends Controller
 
             return $this->successResponse($chartofaccount, __('Chart of account created successfully'), 201);
         } catch (\Exception $e) {
-            return $this->errorResponse(__('Something went wrong'), $e->getMessage(), 500);
+            Log::error('Chart of Account API store error', ['e' => $e]);
+            return $this->errorResponse(__('Something went wrong'), null, 500);
         }
     }
 
@@ -120,7 +123,8 @@ class ChartOfAccountApiController extends Controller
 
             return $this->successResponse($account, __('Chart of account details retrieved successfully'));
         } catch (\Exception $e) {
-            return $this->errorResponse(__('Something went wrong'), $e->getMessage(), 500);
+            Log::error('Chart of Account API show error', ['e' => $e]);
+            return $this->errorResponse(__('Something went wrong'), null, 500);
         }
     }
 
@@ -160,14 +164,15 @@ class ChartOfAccountApiController extends Controller
             $chartofaccount->current_balance = $validated['current_balance'] ?? 0;
             $chartofaccount->is_active = $validated['is_active'];
             $chartofaccount->description = $validated['description'] ?? null;
-            $chartofaccount->account_type_id = $validated['account_type_id'] ?? null;
+            $chartofaccount->account_type_id = $validated['account_type_id'];
             $chartofaccount->save();
 
             UpdateChartOfAccount::dispatch($request, $chartofaccount);
 
             return $this->successResponse($chartofaccount, __('Chart of account updated successfully'));
         } catch (\Exception $e) {
-            return $this->errorResponse(__('Something went wrong'), $e->getMessage(), 500);
+            Log::error('Chart of Account API update error', ['e' => $e]);
+            return $this->errorResponse(__('Something went wrong'), null, 500);
         }
     }
 
@@ -195,7 +200,8 @@ class ChartOfAccountApiController extends Controller
 
             return $this->successResponse(null, __('Chart of account deleted successfully'));
         } catch (\Exception $e) {
-            return $this->errorResponse(__('Something went wrong'), $e->getMessage(), 500);
+            Log::error('Chart of Account API destroy error', ['e' => $e]);
+            return $this->errorResponse(__('Something went wrong'), null, 500);
         }
     }
 }

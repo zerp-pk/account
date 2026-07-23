@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Zerp\Account\Models\JournalEntry;
 
 class JournalEntryApiController extends Controller
@@ -51,7 +52,8 @@ class JournalEntryApiController extends Controller
 
             return $this->paginatedResponse($entries, __('Journal entries retrieved successfully'));
         } catch (\Exception $e) {
-            return $this->errorResponse(__('Something went wrong'), $e->getMessage(), 500);
+            Log::error('Journal Entry API index error', ['e' => $e]);
+            return $this->errorResponse(__('Something went wrong'), null, 500);
         }
     }
 
@@ -81,7 +83,8 @@ class JournalEntryApiController extends Controller
 
             return $this->successResponse($entry, __('Journal entry details retrieved successfully'));
         } catch (\Exception $e) {
-            return $this->errorResponse(__('Something went wrong'), $e->getMessage(), 500);
+            Log::error('Journal Entry API show error', ['e' => $e]);
+            return $this->errorResponse(__('Something went wrong'), null, 500);
         }
     }
 }

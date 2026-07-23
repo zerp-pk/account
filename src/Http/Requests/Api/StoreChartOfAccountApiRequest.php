@@ -17,7 +17,7 @@ class StoreChartOfAccountApiRequest extends ApiFormRequest
             'current_balance' => 'nullable|numeric|min:0',
             'is_active' => 'boolean',
             'description' => 'nullable|string|max:1000',
-            'account_type_id' => 'nullable|exists:account_types,id,created_by,' . creatorId(),
+            'account_type_id' => 'required|exists:account_types,id,created_by,' . creatorId(),
             'parent_account_id' => 'nullable|exists:chart_of_accounts,id,created_by,' . creatorId()
         ];
     }

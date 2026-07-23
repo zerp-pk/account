@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Zerp\Account\Models\CustomerPayment;
 
 class CustomerPaymentApiController extends Controller
@@ -57,7 +58,8 @@ class CustomerPaymentApiController extends Controller
 
             return $this->paginatedResponse($payments, __('Customer payments retrieved successfully'));
         } catch (\Exception $e) {
-            return $this->errorResponse(__('Something went wrong'), $e->getMessage(), 500);
+            Log::error('Customer Payment API index error', ['e' => $e]);
+            return $this->errorResponse(__('Something went wrong'), null, 500);
         }
     }
 
@@ -87,7 +89,8 @@ class CustomerPaymentApiController extends Controller
 
             return $this->successResponse($payment, __('Customer payment details retrieved successfully'));
         } catch (\Exception $e) {
-            return $this->errorResponse(__('Something went wrong'), $e->getMessage(), 500);
+            Log::error('Customer Payment API show error', ['e' => $e]);
+            return $this->errorResponse(__('Something went wrong'), null, 500);
         }
     }
 
@@ -110,7 +113,8 @@ class CustomerPaymentApiController extends Controller
 
             return $this->successResponse(null, __('Customer payment deleted successfully'));
         } catch (\Exception $e) {
-            return $this->errorResponse(__('Something went wrong'), $e->getMessage(), 500);
+            Log::error('Customer Payment API destroy error', ['e' => $e]);
+            return $this->errorResponse(__('Something went wrong'), null, 500);
         }
     }
 }

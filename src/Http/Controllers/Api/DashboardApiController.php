@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Zerp\Account\Models\Customer;
 use Zerp\Account\Models\Vendor;
 use Zerp\Account\Models\CustomerPayment;
@@ -113,7 +114,8 @@ class DashboardApiController extends Controller
                 'recentExpenses' => $recentExpenses
             ], __('Dashboard retrieved successfully'));
         } catch (\Exception $e) {
-            return $this->errorResponse(__('Something went wrong'), $e->getMessage(), 500);
+            Log::error('Accounting Dashboard API error', ['e' => $e]);
+            return $this->errorResponse(__('Something went wrong'), null, 500);
         }
     }
 }
