@@ -16,7 +16,6 @@ import EditExpenseCategories from './Edit';
 import NoRecordsFound from '@/components/no-records-found';
 import { ExpenseCategories, ExpenseCategoriesIndexProps, ExpenseCategoriesModalState } from './types';
 import SystemSetupSidebar from "../SystemSetupSidebar";
-import { url } from 'inspector';
 
 export default function Index() {
     const { t } = useTranslation();
